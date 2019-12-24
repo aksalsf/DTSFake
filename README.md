@@ -6,4 +6,5 @@ Repositori ini berisi sebuah mini-project sebagai tugas akhir semester 1 Teknik 
 3. String.format
 4. Include simple CRUD
 5. Good UI
-// Visit http://aksal-sf.blogspot.com/ for suggestion and get in touch.
+
+Visit http://aksal-sf.blogspot.com/ for suggestion and get in touch.
