@@ -59,7 +59,12 @@ public class DTSFake {
 				clearScreen();
 				homeMenuPelatihan(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
 				break;
+			case 3: break;
 			default: //Keluar dari program
+				System.out.println("Opsi yang Anda ketikkan salah!");
+				sleep();
+				clearScreen();
+				homeMenu(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
 				break;
 		}
 	}
@@ -110,8 +115,14 @@ public class DTSFake {
 				deletePeserta(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
 				homeMenuPeserta(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
 				break;
-			default:
+			case 7:
 				homeMenu(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
+				break;
+			default:
+				System.out.println("Opsi yang Anda ketikkan salah!");
+				sleep();
+				clearScreen();
+				homeMenuPeserta(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
 				break;
 		}
 	}
@@ -645,6 +656,7 @@ public class DTSFake {
 			default:
 				System.out.println("Opsi yang Anda ketik salah!");
 				sleep();
+				clearScreen();
 				homeMenuPelatihan(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
 				break;
 		}
