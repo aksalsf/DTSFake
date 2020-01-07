@@ -131,17 +131,50 @@ public class DTSFake {
 		garis();
 		System.out.println("\t\t\t\t\t\tPendaftaran Peserta Baru");
 		garis();
-		System.out.print("Nama: ");
-		names.add(data.nextLine());
-		garisSLine();
-		inputEducation(educations);
-		garisSLine();
-		inputGender(genders);
-		garisSLine();
-		inputEmail(emails);
-		garisSLine();
-		inputTraining(trainings, trainingNames);
-
+		// Input email start
+		System.out.print("Email: ");
+		String tempData = data.nextLine();
+		if (!tempData.contains("@") || !tempData.contains(".com") || tempData.contains("@.com")) {
+			System.out.println("Email tidak valid!"); sleep();clearScreen();inputPeserta(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
+		} else if (emails.contains(tempData)) {
+			System.out.println("Apakah Anda ingin menggunakan data "+tempData+" yang telah ada dalam sistem (y/n)?");
+			System.out.print("jawab: ");
+			char choice = data.next().charAt(0);data.nextLine();
+			if (choice=='y' || choice=='Y') {
+				emails.add(tempData);
+				names.add(names.get(emails.indexOf(tempData)));
+				educations.add(educations.get(emails.indexOf(tempData)));
+				genders.add(genders.get(emails.indexOf(tempData)));
+				garisSLine();
+				inputTraining(trainings, trainingNames);
+			} else if (choice!='n' && choice!='N') {
+				System.out.println("Opsi yang Anda pilih salah!"); sleep();clearScreen();inputPeserta(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
+			} else {
+				emails.add(tempData);
+				garisSLine();
+				// Input email end
+				System.out.print("Nama: ");
+				names.add(data.nextLine());
+				garisSLine();
+				inputEducation(educations);
+				garisSLine();
+				inputGender(genders);
+				garisSLine();
+				inputTraining(trainings, trainingNames);	
+			}
+		} else {
+			emails.add(tempData);
+			garisSLine();
+			// Input email end
+			System.out.print("Nama: ");
+			names.add(data.nextLine());
+			garisSLine();
+			inputEducation(educations);
+			garisSLine();
+			inputGender(genders);
+			garisSLine();
+			inputTraining(trainings, trainingNames);	
+		}
 	}
 	public static void inputEducation(ArrayList<String> array) {
 		System.out.println("Pendidikan Terakhir");
@@ -172,15 +205,6 @@ public class DTSFake {
 			case 'P': array.add('P'); break;
 			case 'p': array.add('P'); break;
 			default: System.out.println("Data tidak valid!"); inputGender(array); break;
-		}
-	}
-	public static void inputEmail(ArrayList<String> array) {
-		System.out.print("Email: ");
-		String tempData = data.nextLine();
-		if (!tempData.contains("@") || !tempData.contains(".com") || tempData.contains("@.com")) {
-			System.out.println("Email tidak valid!"); inputEmail(array);
-		} else {
-			array.add(tempData);
 		}
 	}
 	public static void inputTraining(ArrayList<String> array, ArrayList<String> trainingNames) {
@@ -518,7 +542,7 @@ public class DTSFake {
 			for (int i=0;i<emails.size();i++) {
 				if (emails.get(i).equals(email)) {
 				System.out.println(String.format("%-30.30s", names.get(i))+String.format("%-12.10s", educations.get(i))+String.format("%-15.15s", genders.get(i))+String.format("%-30.30s", emails.get(i))+String.format("%-30.30s", trainings.get(i)));
-				garisSLine();
+				garisSLine();	
 				System.out.print("Cetak Invoice? (y/n) : ");
 				does = data.next().charAt(0);data.nextLine();
 				if (does=='y' || does=='Y') {
@@ -574,10 +598,10 @@ public class DTSFake {
 	}
 	public static void deletePesertaOnce(ArrayList<String> names, ArrayList<String> educations, ArrayList<Character> genders, ArrayList<String> emails, ArrayList<String> trainings, ArrayList<String> trainingNames, ArrayList<String> trainingDates, ArrayList<String> trainingPlaces, ArrayList<Integer> trainingPrices) {
 		System.out.print("Ketikkan email peserta yang ingin Anda hapus => ");
-		String primaryKey = data.nextLine();
-		if (emails.contains(primaryKey)) {
+		String keyword = data.nextLine();
+		if (emails.contains(keyword)) {
 			for (int i=0;i<emails.size();i++) {
-				if (emails.get(i).equals(primaryKey)) {
+				if (emails.get(i).equals(keyword)) {
 				garisSLine();
 				System.out.println(String.format("%-30.30s", names.get(i))+String.format("%-12.10s", educations.get(i))+String.format("%-15.15s", genders.get(i))+String.format("%-30.30s", emails.get(i))+String.format("%-30.30s", trainings.get(i)));
 				garisSLine();
@@ -670,28 +694,31 @@ public class DTSFake {
 		String training = data.nextLine();
 		if (trainingNames.contains(training)) {
 			System.out.println("Pelatihan tersebut telah ada!");
+			sleep();
+			clearScreen();
+			inputPelatihan(names,educations,genders,emails,trainings,trainingNames,trainingDates,trainingPlaces,trainingPrices);
 		} else {
 			trainingNames.add(training);
+			garisSLine();
+			// Waktu Pelatihan
+			System.out.println("Waktu Pelatihan");
+			System.out.println("Contoh: 23 Desember 2019");
+			System.out.print(": ");
+			trainingDates.add(data.nextLine());
+			garisSLine();
+			// Tempat Pelatihan
+			System.out.println("Tempat Pelatihan");
+			System.out.println("Contoh: Surakarta");
+			System.out.print(": ");
+			trainingPlaces.add(data.nextLine());
+			garisSLine();
+			// Harga Pelatihan
+			System.out.println("Harga Pelatihan");
+			System.out.println("Contoh: 150000");
+			System.out.print(": ");
+			trainingPrices.add(data.nextInt());
+			garisSLine();
 		}
-		garisSLine();
-		// Waktu Pelatihan
-		System.out.println("Waktu Pelatihan");
-		System.out.println("Contoh: 23 Desember 2019");
-		System.out.print(": ");
-		trainingDates.add(data.nextLine());
-		garisSLine();
-		// Tempat Pelatihan
-		System.out.println("Tempat Pelatihan");
-		System.out.println("Contoh: Surakarta");
-		System.out.print(": ");
-		trainingPlaces.add(data.nextLine());
-		garisSLine();
-		// Harga Pelatihan
-		System.out.println("Harga Pelatihan");
-		System.out.println("Contoh: 150000");
-		System.out.print(": ");
-		trainingPrices.add(data.nextInt());
-		garisSLine();
 	}
 	public static void printPelatihan(ArrayList<String> names, ArrayList<String> educations, ArrayList<Character> genders, ArrayList<String> emails, ArrayList<String> trainings, ArrayList<String> trainingNames, ArrayList<String> trainingDates, ArrayList<String> trainingPlaces, ArrayList<Integer> trainingPrices) {
 		clearScreen();
@@ -755,6 +782,7 @@ public class DTSFake {
 				garisSLine();
 				if (trainingNames.contains(tempData)) {
 					System.out.println("Maaf, pelatihan tersebut telah ada!");
+					sleep();
 				} else {
 					trainingNames.set(index, tempData);
 					if (Collections.frequency(trainings,primaryKey)>0) {
